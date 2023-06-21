@@ -1,5 +1,4 @@
 {
-  "name": "ape-starter",
   "private": true,
   "scripts": {
     "cli": "ape-cli-ts",
@@ -12,7 +11,7 @@
     "build": "tsc --project tsconfig.build.json"
   },
   "engines": {
-    "node": "16"
+    "node": "^16"
   },
   "dependencies": {
     "@ape-framework/server": "../ape-framework/dist/server"

@@ -1,0 +1,12 @@
+{
+  "name": "ape-starter",
+  "private": true,
+  "bin": "index.js",
+  "engines": {
+    "node": "^16"
+  },
+  "dependencies": {
+    "fs-extra": "^11.1",
+    "yargs-parser": "^21.1"
+  }
+}
