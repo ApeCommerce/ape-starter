@@ -4,7 +4,7 @@
     "src"
   ],
   "testMatch": [
-    "**/*.spec.ts"
+    "**/*.spec.js"
   ],
   "collectCoverage": false,
   "coverageDirectory": "coverage",
