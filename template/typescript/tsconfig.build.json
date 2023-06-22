@@ -6,6 +6,6 @@
   },
   "exclude": [
     "dist",
-    "src/test"
+    "**/*.spec.ts"
   ]
 }
