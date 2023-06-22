@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "cli": "ape-cli-ts",
+    "start": "ape-cli-ts api start",
     "lint": "eslint src --fix",
     "lint:ci": "eslint src",
     "test": "jest --verbose",
@@ -14,7 +14,7 @@
     "node": "^16"
   },
   "dependencies": {
-    "@ape-framework/server": "../ape-framework/dist/server"
+    "@ape-framework/server": "^0.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5",
