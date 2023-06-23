@@ -1,6 +1,6 @@
 # Ape Framework starter CLI
 
-Command line tool to create new Ape Framework projects.
+Command line tool to create new [Ape Framework](https://github.com/ApeCommerce/ape-framework) projects.
 
 NPM package: [@ape-framework/starter](https://www.npmjs.com/package/@ape-framework/starter)
 
@@ -9,26 +9,21 @@ GitHub repository: [ApeCommerce/ape-starter](https://github.com/ApeCommerce/ape-
 ## Usage
 
 ```
-npx @ape-framework/starter <project-name> [--ts | --js]
+npx @ape-framework/starter <name> [--ts | --js] [-f | --force]
 ```
 
 Options:
 
 ```
---ts  Use TypeScript template (default).
---js  Use JavaScript template.
+--ts         TypeScript template (default).
+--js         JavaScript template.
+-f, --force  Remove existing project.
 ```
 
-## Examples
+## Example
 
 Create a `hello-ape` TypeScript project:
 
 ```
 npx @ape-framework/starter hello-ape
-```
-
-Create a `hello-ape-js` JavaScript project:
-
-```
-npx @ape-framework/starter --js hello-ape-js
 ```
