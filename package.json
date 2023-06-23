@@ -1,7 +1,7 @@
 {
   "name": "ape-starter",
   "private": true,
-  "bin": "index.js",
+  "bin": "bin.js",
   "engines": {
     "node": "^16"
   },
