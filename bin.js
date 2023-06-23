@@ -4,8 +4,9 @@ const parseArgs = require('yargs-parser');
 
 const exit = (code) => process.exit(code);
 const writeLn = (s) => process.stdout.write(`${s}\n`);
+
 const parseBoolean = (b) => b === true || b === 1;
-const parseString = (s) => typeof s === 'boolean' ? '' : (s === 0 ? '0' : String(s || ''));
+const parseString = (s) => typeof s === 'boolean' ? '' : String(s || '');
 
 const help = `Usage:
 npx @ape-framework/starter <name> [--ts | --js] [-f | --force]
@@ -22,14 +23,19 @@ delete options._;
 const name = parseString(args[0]);
 if (!name || name === 'help') { writeLn(help); exit(); }
 
-const typescript = parseBoolean(options.ts);
-const javascript = parseBoolean(options.js);
+const ts = parseBoolean(options.ts);
+const js = parseBoolean(options.js);
+if (ts && js) throw new Error('Options "--ts" and "--js" cannot be used together');
 
 const force = parseBoolean(options.f) || parseBoolean(options.force);
 
-// throw new Error(`CLI: invalid shit "${shit}"`);
-// const foo = fs.existsSync('package.json');
+const exists = fs.existsSync(name);
+if (exists && !force) {
+  throw new Error(`Project already exists`)
+}
+
+const template = ts ? 'typescript' : 'javascript';
 
 console.log(options);
 console.log(args);
-console.log({ typescript, javascript, force });
+console.log({ name, ts, js, force, exists, template });
