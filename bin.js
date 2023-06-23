@@ -31,11 +31,10 @@ const force = parseBoolean(options.f) || parseBoolean(options.force);
 
 const exists = fs.existsSync(name);
 if (exists && !force) {
-  throw new Error(`Project already exists`)
+  throw new Error('Project already exists, use "-f" or "--force" to remove existing project');
 }
 
-const template = ts ? 'typescript' : 'javascript';
+const template = js ? 'javascript' : 'typescript';
 
-console.log(options);
-console.log(args);
+console.log(args, options);
 console.log({ name, ts, js, force, exists, template });
