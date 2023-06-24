@@ -39,4 +39,4 @@ const template = js ? 'javascript' : 'typescript';
 fs.copySync(join(__dirname, 'template', template), path);
 
 const pkg = fs.readJsonSync(join(path, 'package.json'));
-fs.writeJsonSync(join(path, 'package.json'), { ...pkg, name: basename(path) }, { spaces: 2 });
+fs.writeJsonSync(join(path, 'package.json'), { name: basename(path), ...pkg }, { spaces: 2 });
