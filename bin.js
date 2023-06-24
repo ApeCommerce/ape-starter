@@ -1,4 +1,5 @@
 #! /usr/bin/env node
+const { basename } = require('path');
 const fs = require('fs-extra');
 const parseArgs = require('yargs-parser');
 
@@ -8,20 +9,20 @@ const writeLn = (s) => process.stdout.write(`${s}\n`);
 const parseBoolean = (b) => b === true || b === 1;
 const parseString = (s) => typeof s === 'boolean' ? '' : String(s || '');
 
-const help = `Usage:
-npx @ape-framework/starter <name> [--ts | --js] [-f | --force]
-
-Options:
---ts         TypeScript template (default).
---js         JavaScript template.
--f, --force  Remove existing project.`;
-
 const options = parseArgs(process.argv.slice(2));
 const args = options._;
 delete options._;
 
-const name = parseString(args[0]);
-if (!name || name === 'help') { writeLn(help); exit(); }
+const help = `Usage:
+npx @ape-framework/starter <path> [--ts | --js] [-f | --force]
+
+Options:
+--ts         TypeScript template (default).
+--js         JavaScript template.
+-f, --force  Overwrite existing path.`;
+
+const path = parseString(args[0]);
+if (!path || path === 'help') { writeLn(help); exit(); }
 
 const ts = parseBoolean(options.ts);
 const js = parseBoolean(options.js);
@@ -29,12 +30,10 @@ if (ts && js) throw new Error('Options "--ts" and "--js" cannot be used together
 
 const force = parseBoolean(options.f) || parseBoolean(options.force);
 
-const exists = fs.existsSync(name);
-if (exists && !force) {
-  throw new Error('Project already exists, use "-f" or "--force" to remove existing project');
+if (fs.existsSync(path)) {
+  if (!force) throw new Error('Path already exists, use "-f" or "--force" to overwrite');
+  fs.removeSync(path);
 }
 
+const name = basename(path);
 const template = js ? 'javascript' : 'typescript';
-
-console.log(args, options);
-console.log({ name, ts, js, force, exists, template });
