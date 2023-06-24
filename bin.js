@@ -1,5 +1,5 @@
 #! /usr/bin/env node
-const { basename } = require('path');
+const { basename, join } = require('path');
 const fs = require('fs-extra');
 const parseArgs = require('yargs-parser');
 
@@ -35,5 +35,8 @@ if (fs.existsSync(path)) {
   fs.removeSync(path);
 }
 
-const name = basename(path);
 const template = js ? 'javascript' : 'typescript';
+fs.copySync(join(__dirname, 'template', template), path);
+
+const pkg = fs.readJsonSync(join(path, 'package.json'));
+fs.writeJsonSync(join(path, 'package.json'), { ...pkg, name: basename(path) }, { spaces: 2 });
