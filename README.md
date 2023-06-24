@@ -9,7 +9,7 @@ GitHub repository: [ApeCommerce/ape-starter](https://github.com/ApeCommerce/ape-
 ## Usage
 
 ```
-npx @ape-framework/starter <name> [--ts | --js] [-f | --force]
+npx @ape-framework/starter <path> [--ts | --js] [-f | --force]
 ```
 
 Options:
@@ -17,7 +17,7 @@ Options:
 ```
 --ts         TypeScript template (default).
 --js         JavaScript template.
--f, --force  Remove existing project.
+-f, --force  Overwrite existing path.
 ```
 
 ## Example

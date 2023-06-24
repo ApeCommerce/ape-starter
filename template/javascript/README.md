@@ -1,5 +1,11 @@
 # Ape Framework starter project (JavaScript)
 
+Set environment for development:
+
+```
+cp .env.dev .env
+```
+
 Install dependencies:
 
 ```
@@ -33,5 +39,5 @@ npm run test
 Start API server in production:
 
 ```
-NODE_ENV=production npx ape-cli api start
+NODE_ENV=production NODE_PATH=src npx ape-cli api start
 ```

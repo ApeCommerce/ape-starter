@@ -1,5 +1,11 @@
 # Ape Framework starter project (TypeScript)
 
+Set environment for development:
+
+```
+cp .env.dev .env
+```
+
 Install dependencies:
 
 ```
