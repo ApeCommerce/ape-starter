@@ -1,0 +1,41 @@
+name: Unrelease NPM package
+
+run-name: Unrelease ${{ inputs.tag }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag
+        default: v0.0.0
+        required: true
+
+jobs:
+  unrelease:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get tag
+        id: tag
+        run: |
+          tag=${{ inputs.tag }}
+          version=${tag:1}
+          echo "tag=$tag" >> $GITHUB_OUTPUT
+          echo "version=$version" >> $GITHUB_OUTPUT
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Delete tag
+        run: git push --delete origin ${{ steps.tag.outputs.tag }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org
+
+      - name: Unpublish package from NPM
+        run: |
+          npm unpublish @ape-framework/starter@${{ steps.tag.outputs.version }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

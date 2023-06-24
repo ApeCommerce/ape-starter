@@ -1,0 +1,44 @@
+name: Release NPM package
+
+run-name: Release ${{ github.ref_name }}
+
+on:
+  push:
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+
+      - v0.0.0-dev.*
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get tag
+        id: tag
+        run: |
+          tag=${{ github.ref_name }}
+          version=${tag:1}
+          is_dev=${{ startsWith(github.ref_name, 'v0.0.0-dev.') }}
+          echo "version=$version" >> $GITHUB_OUTPUT
+          echo "is_dev=$is_dev" >> $GITHUB_OUTPUT
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Publish package to NPM
+        run: |
+          ./package.sh
+          sed -i "s|__version__|${{ steps.tag.outputs.version }}|" dist/package.json
+          sed -i "s|__description__|${{ github.event.repository.description }}|" dist/package.json
+          cd $GITHUB_WORKSPACE/dist
+          npm publish --tag=${{ steps.tag.outputs.is_dev == 'true' && 'dev' || 'latest' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
