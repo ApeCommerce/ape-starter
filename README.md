@@ -22,7 +22,7 @@ Options:
 
 ## Example
 
-Create a `hello-ape` TypeScript project:
+Creating a `hello-ape` TypeScript project:
 
 ```
 npx @ape-framework/starter hello-ape
