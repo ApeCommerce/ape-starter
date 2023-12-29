@@ -1,4 +1,4 @@
-# Ape Framework's project starter
+# Ape Framework project starter
 
 Command line tool to create new [Ape Framework](https://github.com/ApeCommerce/ape-framework) projects.
 
